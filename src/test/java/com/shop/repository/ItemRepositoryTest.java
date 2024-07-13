@@ -14,8 +14,8 @@ import com.shop.entity.Item;
 @SpringBootTest
 @Transactional // 트랜잭션을 걸면 동작 후 롤백을 한다 데이터를 저장을 확인하기위해선 안붙이거나 옵션을 붙일수있다.
 class ItemRepositoryTest {
-	@Autowired
-	ItemRepository itemRepository;
+		@Autowired
+		ItemRepository itemRepository;
 	
 	
 		public void createItemList() {
@@ -34,30 +34,6 @@ class ItemRepositoryTest {
 			}
 		}
 		
-		  @Test
-		    @DisplayName("가격 내림차순 조회 테스트")
-		    public void findByPriceLessThanOrderByPriceDesc(){
-		        this.createItemList();
-		        List<Item> itemList = itemRepository.findByPriceLessThanOrderByPriceDesc(10005);
-		        for(Item item : itemList){
-		            System.out.println(item.toString());
-		        }
-		    }
-
-		    @Test
-		    @DisplayName("JPQL 쿼리")
-		    public void findByItemDetailTest(){
-		        createItemList();
-
-		        List<Item> itemList = itemRepository.findByItemDetail("테스트");
-
-		        for (Item item : itemList) {
-		            System.out.println(item);
-		        }
-		    }
-		
-		
-		
 		@Test
 		@DisplayName("상품/상세 OR테스트")
 		public void findByItemNmOrItemDetailTest() {
@@ -69,6 +45,41 @@ class ItemRepositoryTest {
 			});
 		}
 		
+		 @Test
+		    @DisplayName("가격 LessThan 테스트")
+		    public void findByPriceLessThanTest(){
+		        this.createItemList();
+		        List<Item> itemList = itemRepository.findByPriceLessThan(10005);
+		        for(Item item : itemList){
+		            System.out.println(item.toString());
+		        }
+		    }
+		
+		 @Test
+		    @DisplayName("JPQL 쿼리")
+		    public void findByItemDetailTest(){
+		        createItemList();
+
+		        List<Item> itemList = itemRepository.findByItemDetail("테스트");
+
+		        for (Item item : itemList) {
+		            System.out.println(item);
+		        }
+		    }
+
+		    @Test
+		    @DisplayName("Native 쿼리")
+		    public void findByItemDetailNativeTest(){
+		        createItemList();
+
+		        List<Item> itemList = itemRepository.findByItemDetailNative("테스트");
+
+		        for (Item item : itemList) {
+		            System.out.println(item);
+		        }
+		    }
+
+		 
 		@Test
 		@DisplayName("상품 검색 테스트 ")
 		public void findByItemNmTest() {
