@@ -12,7 +12,7 @@ public class HelloController {
 	public UserDto hello() {
 		UserDto userDto = new UserDto();
 		userDto.setAge(20);
-		userDto.setName("¿Ãº∫øÏ");
+		userDto.setName("Ïù¥ÏÑ±Ïö∞");
 		return userDto;
 	}
 	
